@@ -72,6 +72,7 @@ const Body = () => {
         <RestaurantCard resData={resList[2]} /> */}
         {filteredListofRes.map((restaurant) => (
           <Link
+            className="card-links"
             key={restaurant.info.id}
             to={"/restaurant/" + restaurant.info.id}
           >
