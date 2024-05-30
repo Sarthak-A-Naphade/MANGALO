@@ -1,6 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
+import { useEffect, useState } from 'react';
+import UserContext from './utils/UserContex';
 
 
 /* Components of Our Food-Order App
@@ -21,13 +23,24 @@ import Header from './components/Header';
  */
 
 function App() {
+  const [userName, setUserName] = useState();
+
+  useEffect(()=>{
+    const data = {
+      name : "Sarthak Naphade"
+    }
+    setUserName(data.name);
+
+  },[])
 
 
   return (
+    <UserContext.Provider value={{loggedInUser : userName, setUserName}}>
     <div className="App">
       <Header/>
       <Outlet/>
     </div>
+    </UserContext.Provider>
   );
 }
 
