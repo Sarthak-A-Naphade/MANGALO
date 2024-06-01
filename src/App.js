@@ -1,9 +1,10 @@
-import { Outlet } from 'react-router-dom';
-import './App.css';
-import Header from './components/Header';
-import { useEffect, useState } from 'react';
-import UserContext from './utils/UserContex';
-
+import { Outlet } from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header";
+import { useEffect, useState } from "react";
+import UserContext from "./utils/UserContex";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 /* Components of Our Food-Order App
  * Header
@@ -25,25 +26,23 @@ import UserContext from './utils/UserContex';
 function App() {
   const [userName, setUserName] = useState();
 
-  useEffect(()=>{
+  useEffect(() => {
     const data = {
-      name : "Sarthak Naphade"
-    }
+      name: "Sarthak Naphade",
+    };
     setUserName(data.name);
-
-  },[])
-
+  }, []);
 
   return (
-    <UserContext.Provider value={{loggedInUser : userName, setUserName}}>
-    <div className="App">
-      <Header/>
-      <Outlet/>
-    </div>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="App">
+          <Header />
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 }
-
-
 
 export default App;
